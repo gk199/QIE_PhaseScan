@@ -106,3 +106,6 @@ Elog: April local LED test [elog](http://cmsonline.cern.ch/cms-elog/1179928).
 Notes from the scan are also at `/nfshome0/gkopp/QIEscan/Monitoring_QIEscan.txt`.
 
 Confirm that nominal phases are reverted to.
+
+## Locations
+`/nfshome0/gkopp/QIEscan`
