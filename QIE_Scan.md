@@ -3,17 +3,17 @@
 ## Scan plan
 
 ### Global scan
-1. Update TDC LUT and uMNio word via CfgGit snippet (on hcalmon)
+1. Update TDC LUT and uMNio word via CfgGit snippet (on hcalmon). Example [CfgGit](http://hcalmon.cms/cgit/HcalCfg/commit/?id=69a7e58fa4f8e4578dc431302fbdcff112938297)
 2. RR to reconfigure and pick up new TDC LUT
-3. Start scan, each point for 600 seconds (10 mins). Should be done from hcalngccm03, either from P5 computer or tmux session.
+3. Start scan, each point for 720 seconds (12 mins). Should be done from hcalngccm03 from a tmux session
 	For April run, 
 	```
-	python scan_fine.py --seconds 600 --hb --he --logfile AprilQIEscan.txt | tee output_global_april.txt 
+	python scan_fine.py --seconds 600 --cycles -1 --hb --he --logfile AprilQIEscan.txt | tee output_global_april.txt 
 	```
-4. Revert TDC LUT and uMNio word via snippet update
+4. Revert TDC LUT and uMNio word via snippet update. Example [CfgGit](http://hcalmon.cms/cgit/HcalCfg/commit/?id=9162d0bdc5d5474bd9693e99fe03e6b62fbe083c)
 5. RR to reconfigure
 6. Check TDC LUT, uMNio word, and QIE phases are reverted (on hcalngccm03)
-7. Copy files to HCAL DPG EOS space
+7. Copy files to HCAL DPG EOS space. JetMET dataset, RAW data is needed. 
 
 ### Local testing
 1. Baseline LED run (multipartition) for comparison
@@ -59,6 +59,8 @@ on L54 of `HcalCfg/Master/global.xml`.
 # Monitoring during the scan
 Multiple windows open: 1 on hcalmon to change snippets, 2 in hcalngccm03 for checking ngFEC and uMNioTool, 1 in hcalngccm03 to run the scan. Have monitoring information from HCAL shifter page open as well. 
 
+OMS plot to check timing changes [Timing vs. Lumisection](https://cmsweb.cern.ch/dqm/online/start?runnr=365983;dataset=/Global/Online/ALL;sampletype=online_data;filter=all;referencepos=overlay;referenceshow=customise;referencenorm=True;referenceobj1=refobj;referenceobj2=none;referenceobj3=none;referenceobj4=none;search=;striptype=object;stripruns=;stripaxis=run;stripomit=none;workspace=HCAL;size=M;root=Hcal/DigiTask/TimingvsLS/SubdetPM;focus=;zoom=no;).
+
 ## Check QIE phase delay and TDC LUTs
 ```
 ssh hcalngccm03
@@ -88,7 +90,7 @@ Ctrl-C if need to quit out safely
 
 [twiki](https://twiki.cern.ch/twiki/bin/view/CMS/HcalDaqOnCallHowTo). This links to the most recent DAQ on call slides. 
 
-## Check low level DQM
+## Check low level DQM (local run)
 HBTrend -> HBTvsEvt to see avgTS vs Event plot for the LED run.
 
 # General notes
