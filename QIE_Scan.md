@@ -5,11 +5,15 @@
 ### Global scan
 1. Update TDC LUT and uMNio word via CfgGit snippet (on hcalmon). Example [CfgGit](http://hcalmon.cms/cgit/HcalCfg/commit/?id=69a7e58fa4f8e4578dc431302fbdcff112938297)
 2. RR to reconfigure and pick up new TDC LUT
-3. Start scan, each point for 720 seconds (12 mins). Should be done from hcalngccm03 from a tmux session
-	For April run, 
+3. Start scan, each point for 600 seconds (10 mins). Should be done from hcalngccm03 from a tmux session. For April scan, 
 	```
+	ssh hcalngccm03
+	tmux new -s AprilScan
 	python scan_fine.py --seconds 600 --cycles -1 --hb --he --logfile AprilQIEscan.txt | tee output_global_april.txt 
 	```
+	This will requre a keyboard interrupt at the end. Can monitor progress in `output_global_april.txt`.
+
+	After detatching from tmux (Ctrl+B and D), reattach with `tmux attach-session -t AprilScan`.
 4. Revert TDC LUT and uMNio word via snippet update. Example [CfgGit](http://hcalmon.cms/cgit/HcalCfg/commit/?id=9162d0bdc5d5474bd9693e99fe03e6b62fbe083c)
 5. RR to reconfigure
 6. Check TDC LUT, uMNio word, and QIE phases are reverted (on hcalngccm03)
