@@ -11,12 +11,13 @@ tree = ElementTree()
 #tree.parse('HB_QIEscanSetting_collisions2023_postNovScanEdits_LEDscan_2023-01-06.xml') # for the LED QIE phase scan
 #tree.parse('HB_QIEscanSetting_collisions2023_postNovScanEdits_gausFit_TS3_2023-01-20.xml') # For April QIE scan around new phases
 #tree.parse('HB_final_2022.xml') # For April QIE scan, 999ns to revert to
+#tree.parse('HB_upd_collisions2022.xml') # For April QIE scan, 111ns for reference 
 tree.parse('DELAY-phaseTuning_HE_2022_Sep_final.xml') # For April QIE scan around 2022 phases for HE
 root = tree.getroot()
 
 def loop():
     outOfRange = 0
-    with open('AprilQIEscanSettings_collisions/' + str(nsShift) + 'ns_HE.txt', 'w') as f:
+    with open('AprilQIEscanSettings_collisions/' + str(nsShift) + 'ns_HE_2022_Sep_final.txt', 'w') as f:
         for sector in root.iter('CFGBrick'):
             sec = sector[3].text
 #            rm1 = 'put ' + sec + '-1' + '-QIE[1-64]_PhaseDelay '
@@ -63,7 +64,7 @@ def main():
 
     
 if __name__ == "__main__":
-    for shift in range (-10, 41, 1): #(-4, 12, 2):
+    for shift in range (0, 1, 1): #(-10, 41, 1): #(-4, 12, 2):
         nsShift = shift
         print(nsShift)
         main()

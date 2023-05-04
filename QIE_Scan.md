@@ -105,11 +105,15 @@ Elog: Aug scan [elog](http://cmsonline.cern.ch/cms-elog/1150378), Aug test [elog
 Post and elog after the run.
 Elog: Nov test [elog](http://cmsonline.cern.ch/cms-elog/1166125), Nov scan [elog](http://cmsonline.cern.ch/cms-elog/1167101). 
 
+Notes from the scan are also at `/nfshome0/gkopp/QIEscan/Monitoring_QIEscan.txt`.
+
 Elog: Feb LED scan [elog](http://cmsonline.cern.ch/cms-elog/1172774).
 
 Elog: April local LED test [elog](http://cmsonline.cern.ch/cms-elog/1179928).
 
-Notes from the scan are also at `/nfshome0/gkopp/QIEscan/Monitoring_QIEscan.txt`.
+Elog: April scan [elog](http://cmsonline.cern.ch/cms-elog/1180567).
+
+An issue was seen a couple times where the phase delay wasn't changed between two steps. This may be possible to address using the following suggestion [elog](http://cmsonline.cern.ch/cms-elog/1180672).
 
 Confirm that nominal phases are reverted to.
 
