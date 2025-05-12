@@ -63,7 +63,7 @@ UserDataQieDelay = true
 on L54 of `HcalCfg/Master/global.xml`. This is within the `Laser` block, which needs to all be uncommented if not done already. 
 
 # Monitoring during the scan
-Multiple windows open: 1 on hcalmon to change snippets, 2 in hcalngccm03 for checking ngFEC and uMNioTool, 1 in hcalngccm03 to run the scan. Have monitoring information from HCAL shifter page open as well. 
+Multiple windows open: 1 on hcalmon to change snippets, 1 in hcalngccm03 for checking ngFEC, 1 in hcalutca01 for uMNioTool, and 1 in hcalngccm03 to run the scan. Have monitoring information from HCAL shifter page open as well. 
 
 OMS plot to check timing changes [Timing vs. Lumisection](https://cmsweb.cern.ch/dqm/online/start?runnr=365983;dataset=/Global/Online/ALL;sampletype=online_data;filter=all;referencepos=overlay;referenceshow=customise;referencenorm=True;referenceobj1=refobj;referenceobj2=none;referenceobj3=none;referenceobj4=none;search=;striptype=object;stripruns=;stripaxis=run;stripomit=none;workspace=HCAL;size=M;root=Hcal/DigiTask/TimingvsLS/SubdetPM;focus=;zoom=no;).
 
@@ -82,18 +82,21 @@ get HEM10-1-QIE[1-48]_PhaseDelay
 <this shows QIE delays in hex>
 quit
 ```
+Dennis' scripts below provide a more robust way of monitoring the phase shifts now.
 
 ## Monitoring script for phase delays
-A full monitoring script was prepared by Dennis that makes monitoring the phase delay changes across HB and HE much easier. To run, the 0ns files for both HB and HE are needed for reference, and then the script is called with:
+A full monitoring script was prepared by Dennis that makes monitoring the phase delay changes across HB and HE much easier. To run, the 0ns files for both HB and HE are needed for reference, and then the script is called with (on hcalngccm03):
 ```
 python3 CheckShifts.py --hb --he --ref 0ns_HB.txt 0ns_HE.txt --log test_may8_LED.txt --sleep 2
 ```
 This is currently in `/nfshome0/gkopp/QIEscan/` and also relies on the two files `CheckShiftsCommandH*.txt` in the same directory. The use of the script is in the 2025 phase scan training and output detailed on the May 2025 LED test [elog](http://cmsonline.cern.ch/cms-elog/1259330).
 
 ## Check uMNio for user words
+Run this on hcalutca01 to reduce load on the hcalngccm PCs.
 ```
-ssh hcalngccm03
+ssh hcalutca01
 uMNioTool.exe hcal-uhtr-38-12 -o bridge-ho
+<enter>
 DAQ
 USER
 DUMP
